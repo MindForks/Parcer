@@ -31,7 +31,7 @@ namespace Parcer
 
         public void button1_Click()
         {
-            parser.Settings = new GorodSettings(1, 3);
+            parser.Settings = new GorodSettings(1, 5);
             parser.Start();
         }
 
