@@ -29,18 +29,18 @@ namespace Parser.Core.Habra
             }
             int count = 20;
             var list  = new List<string>();
-            var prev = document.QuerySelectorAll("a").Where(item => item.ClassName != null && item.ClassName.Contains("dark3") && item.TextContent !="");
+            var prev = document.QuerySelectorAll("h3").Where(item => item.ClassName != null && item.ClassName.Contains("title15") && item.TextContent !="");
             var datetime = document.QuerySelectorAll("h3").Where(item => item.ClassName != null && item.ClassName.Contains("title19"));
-            var tags = document.QuerySelectorAll("b");
-           
+            var location = document.QuerySelectorAll("b").Where(item => item.TextContent != "");
+            var picture = document.QuerySelectorAll("img").Where(item => item.TextContent == "");
 
 
-            List<string> hrefTags = new List<string>();
+           /* List<string> hrefTags = new List<string>();
             foreach (IElement element in document.QuerySelectorAll("b").Where(item => item.ClassName != null ))
             {
                 hrefTags.Add(element.GetAttribute("src"));
             }
-           
+           */
             ItemOfCategory[] NewNode = new ItemOfCategory[count];
 
 
@@ -67,10 +67,25 @@ namespace Parser.Core.Habra
 
 
             tmp = 0;
-            foreach (var it in datetime)
+            foreach (var it in picture) // TODO
             {
                 list.Add(it.TextContent);
-                NewNode[tmp].Tags = it.TextContent;
+                NewNode[tmp].Image = it.TextContent;
+                tmp++;
+            }
+
+            tmp = 0;
+            foreach (var it in location)
+            {
+                if (tmp > 24)
+                    break;
+                
+                if (tmp > 4)
+                {
+                    list.Add(it.TextContent);
+                    NewNode[tmp - 5].Location = it.TextContent;
+                   
+                }
                 tmp++;
             }
 
