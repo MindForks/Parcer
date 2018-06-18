@@ -69,8 +69,14 @@ namespace Parser.Core.Habra
             tmp = 0;
             foreach (var it in picture) // TODO
             {
+                if (tmp > 25)
+                    break;
+                
+                if (tmp > 5)
+                {
                 list.Add(it.TextContent);
-                NewNode[tmp].Image = it.TextContent;
+                    NewNode[tmp - 6].Image = "ef";
+                }
                 tmp++;
             }
 
@@ -84,14 +90,11 @@ namespace Parser.Core.Habra
                 {
                     list.Add(it.TextContent);
                     NewNode[tmp - 5].Location = it.TextContent;
+                  
                    
                 }
-                tmp++;
+                tmp++;     
             }
-
-            tmp = 0;
-          
-
 
 
             return list.ToArray();
